@@ -4,7 +4,9 @@ App para gerenciar controle de manutenção de ar-condicionado em grandes lojas
 
 ## Endpoints
     - Marcar Visitas
-    - Gerenciar aparelhos
+    - Cancelar Visitas
+    - Conferir Visitas do dia
+    - Atualizar a lista de visitas
 
 ---
 
