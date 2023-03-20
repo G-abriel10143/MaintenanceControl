@@ -51,9 +51,9 @@ public class MarcarController {
     @DeleteMapping("/api/datasMarcadas/apagar/")
     public ResponseEntity<Marcar> destroy(@PathVariable Long id_empresa) {
         log.info("apagando data marcada com id " + idE);
-        var reservaEncontrada = Marcar.stream().filter(d -> d.getid_empresa().equals(id_empresa)).findFirst();
+        var dataEncontrada = Marcar.stream().filter(d -> d.getid_empresa().equals(id_empresa)).findFirst();
 
-        if (reservaEncontrada.isEmpty())
+        if (dataEncontrada.isEmpty())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
         Marcar.remove(dataEncontrada.get());
@@ -72,7 +72,7 @@ public class MarcarController {
 
         Marcar.remove(dataEncontrada.get());
         data.setid_empresa(id_empresa);
-        Marcar.add(reserva);
+        Marcar.add(marcar);
 
         return ResponseEntity.ok(data);
 
