@@ -2,6 +2,8 @@ package package maintenance.control.MaintenanceControl.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,9 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-package maintenance.control.MaintenanceControl.models;
+import br.com.fiap.maintenance.control.models.Busca;
+import br.com.fiap.maintenance.control.repository.Marcar;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +81,21 @@ public class MarcarController {
 
         return ResponseEntity.ok(data);
 
+        @PutMapping("/api/dataMarcada/atualizar/")
+        public ResponseEntity<Marcar> update(@PathVariable Long id_empresa, @RequestBody Marcar marcar) {
+            log.info("alterando data com id " + id_empresa);
+            var dataEmcontrada = repository.findById(id_empresa) ;
+    
+            if (dataEmcontrada.isEmpty())
+                return ResponseEntity.notFound().build();
+    
+            
+            data.setId(id_empresa);
+    
+            data.save(id_empresa);
+    
+            return ResponseEntity.ok(reserva);
+    
+        }
+    
     }
-
-}

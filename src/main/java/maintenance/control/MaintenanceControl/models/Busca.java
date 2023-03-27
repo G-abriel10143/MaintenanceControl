@@ -1,5 +1,19 @@
 package maintenance.control.MaintenanceControl.models;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
 public class Busca {
 
     int num_login;
