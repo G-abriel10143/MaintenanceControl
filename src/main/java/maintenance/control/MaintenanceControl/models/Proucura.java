@@ -20,6 +20,7 @@ public class Busca {
     String id_empresa;
     String id_marca;
     String id_modelo;
+    String marca;
 
     public Busca() {
     }

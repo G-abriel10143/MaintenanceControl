@@ -3,15 +3,15 @@
 App para gerenciar controle de manutenção de ar-condicionado em grandes lojas
 
 ## Endpoints
-    - Marcar Visitas
+    - Procura Visitas
     - Cancelar Visitas
     - Conferir Visitas do dia
     - Atualizar a lista de visitas
 
 ---
 
-### Marcar Manutenção
-`GET` /maintenancecontrol/api/marcarManuntencao
+### Procura Manutenção
+`GET` /maintenancecontrol/api/ProcuraManuntencao
 
 | campo | tipo | obrigatório | descrição
 |-------|------|:-------------:|--
@@ -45,7 +45,7 @@ App para gerenciar controle de manutenção de ar-condicionado em grandes lojas
 ---
 
 ### Visualizar Manutenção
-`GET` /maintenancecontrol/api/marcarManuntencao
+`GET` /maintenancecontrol/api/ProcuraManuntencao
 
 | campo | tipo | obrigatório | descrição
 |-------|------|:-------------:|--

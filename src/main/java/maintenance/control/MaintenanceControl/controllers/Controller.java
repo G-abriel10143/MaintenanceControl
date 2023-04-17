@@ -16,22 +16,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.maintenance.control.models.Busca;
-import br.com.fiap.maintenance.control.repository.Marcar;
+import br.com.fiap.maintenance.control.repository.Procura;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class MarcarController {
+public class ProcuraController {
 
-    Logger log = LoggerFactory.getLogger(MarcarController.class);
+    Logger log = LoggerFactory.getLogger(ProcuraController.class);
 
-    List<Marcar> Marcar = new ArrayList<>();
+    List<Procura> Procura = new ArrayList<>();
 
-    @GetMapping("/api/marcar/detalhes/")
-    public ResponseEntity<Marcar> show(@PathVariable Long id_empresa) {
+    @AutoWired
+    ProcuraRepository procuraRepository;
+
+    @GetMapping("/api/Procura/detalhes/")
+    public ResponseEntity<Procura> show(@PathVariable Long id_empresa) {
         log.info("buscando data marcada com id " + id_empresa);
-        var dataEncontrada = Marcar.stream().filter(d -> d.getid_empresa().equals(id_empresa)).findFirst();
+        var dataEncontrada = Procura.stream().filter(d -> d.getid_empresa().equals(id_empresa)).findFirst();
 
         if (dataEncontrada.isEmpty())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -41,48 +44,49 @@ public class MarcarController {
     }
 
     @GetMapping("/api/datasMarcadas")
-    public List<datas> index() {
-        return Marcar;
+    public Page<Procura> index(@RequestParam(required = false) String marca, @PageableDefault(size = 5) Pageable pageable) {
+        if (marca == null) return procuraRepository.findAll(pageable);
+        return procuraRepository.;
     }
 
-    @PostMapping("/api/marcar/cadastrar/")
-    public ResponseEntity<Marcar> create(@RequestBody Marcar marcar) {
-        log.info("cadastrando dataMarcada: " + Marcar);
-        marcar.setid_empresa(Marcar.size() + 1l);
-        Marcar.add(marcar);
-        return ResponseEntity.status(HttpStatus.CREATED).body(marcar);
+    @PostMapping("/api/Procura/cadastrar/")
+    public ResponseEntity<Procura> create(@RequestBody Procura Procura) {
+        log.info("cadastrando dataMarcada: " + Procura);
+        Procura.setid_empresa(Procura.size() + 1l);
+        Procura.add(Procura);
+        return ResponseEntity.status(HttpStatus.CREATED).body(Procura);
     }
 
     @DeleteMapping("/api/datasMarcadas/apagar/")
-    public ResponseEntity<Marcar> destroy(@PathVariable Long id_empresa) {
+    public ResponseEntity<Procura> destroy(@PathVariable Long id_empresa) {
         log.info("apagando data marcada com id " + idE);
-        var dataEncontrada = Marcar.stream().filter(d -> d.getid_empresa().equals(id_empresa)).findFirst();
+        var dataEncontrada = Procura.stream().filter(d -> d.getid_empresa().equals(id_empresa)).findFirst();
 
         if (dataEncontrada.isEmpty())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
-        Marcar.remove(dataEncontrada.get());
+        Procura.remove(dataEncontrada.get());
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
     }
 
     @PutMapping("/api/dataMarcada/atualizar/")
-    public ResponseEntity<Marcar> update(@PathVariable Long id_empresa, @RequestBody Marcar marcar) {
+    public ResponseEntity<Procura> update(@PathVariable Long id_empresa, @RequestBody Procura Procura) {
         log.info("alterando dataMarcada com id " + id_empresa);
-        var dataEncontrada = Marcar.stream().filter(d -> d.getid_empresa().equals(id_empresa)).findFirst();
+        var dataEncontrada = Procura.stream().filter(d -> d.getid_empresa().equals(id_empresa)).findFirst();
 
         if (Encontrdaraada.isEmpty())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
-        Marcar.remove(dataEncontrada.get());
+        Procura.remove(dataEncontrada.get());
         data.setid_empresa(id_empresa);
-        Marcar.add(marcar);
+        Procura.add(Procura);
 
         return ResponseEntity.ok(data);
 
         @PutMapping("/api/dataMarcada/atualizar/")
-        public ResponseEntity<Marcar> update(@PathVariable Long id_empresa, @RequestBody Marcar marcar) {
+        public ResponseEntity<Procura> update(@PathVariable Long id_empresa, @RequestBody Procura Procura) {
             log.info("alterando data com id " + id_empresa);
             var dataEmcontrada = repository.findById(id_empresa) ;
     
